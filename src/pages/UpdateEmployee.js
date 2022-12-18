@@ -5,6 +5,15 @@ import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {  getSingleEmployee, updateEmployee } from "../redux/actions";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import dayjs from "dayjs";
+
+const getFormattedDate = (dateStr) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString();
+}
 
 const UpdateEmployee = () => {
   const [state, setState] = useState({
@@ -51,15 +60,8 @@ const UpdateEmployee = () => {
 
   return (
     <div>
-      <Button
-        style={{ width: "380px", marginTop: "20px" }}
-        variant="contained"
-        color="error"
-        onClick={() => navigate("/")}
-      >
-        Çalışan Listesine Dön
-      </Button>
-      <h2> Çalışan Güncelle</h2>
+      
+      <h2> Çalışan Düzenle</h2>
       <h3 style={{ color: "red" }}>{error}</h3>
 
       <Box
@@ -112,15 +114,28 @@ const UpdateEmployee = () => {
           onChange={handleInputChange}
         />
         <br />
-        <TextField
-          id="outlined-basic"
-          label="Doğum Günü"
-          variant="outlined"
-          value={birthday || ""}
-          name="birthday"
-          type="text"
-          onChange={handleInputChange}
-        />
+   
+      
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DesktopDatePicker
+            inputFormat=" MM.DD.YYYY"
+            id="outlined-basic"
+            label="Doğum Günü"
+            variant="outlined"
+            value={getFormattedDate(birthday) || ""}
+            name="birthday"
+            type="text"
+            
+            onChange={ birthday=> handleInputChange({target:{value:birthday, name:'birthday'}})}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+               
+                //onChange={handleInputChange}
+              />
+            )}
+          />
+        </LocalizationProvider>
         <br />
         <Button
           style={{ width: "380px" }}
@@ -131,6 +146,15 @@ const UpdateEmployee = () => {
         >
           Güncelle
         </Button>
+        <br/>
+        <Button
+        style={{ width: "380px", marginTop: "20px" }}
+        variant="contained"
+        color="error"
+        onClick={() => navigate("/")}
+      >
+        Çalışan Listesine Dön
+      </Button>
       </Box>
     </div>
   );

@@ -19,18 +19,34 @@
     {
       "name": "ece",
       "surname": "yazgan",
-      "phone": "5536886043",
-      "job": "yazılım",
-      "birthday": "30.05.1999",
-      "id": 4
+      "phone": "546",
+      "job": "yaz",
+      "birthday": "2022-12-11",
+      "id": 6
     },
     {
-      "name": "gdfshsfdaaaaa",
-      "surname": "hfdhdfhfasdfasf",
-      "phone": "12345",
-      "job": "dfgdfg",
-      "birthday": "30.05.2000",
-      "id": 5
+      "name": "dgdfsg",
+      "surname": "fdhdfh",
+      "phone": "5243245",
+      "job": "354354",
+      "birthday": "2012-01-09T22:00:00.000Z",
+      "id": 7
+    },
+    {
+      "name": "ncvncv",
+      "surname": "mvcmb",
+      "phone": "2524",
+      "job": "cxbxcb",
+      "birthday": "2021-10-31T21:00:00.000Z",
+      "id": 8
+    },
+    {
+      "name": "gfgdfh",
+      "surname": "gfjg",
+      "phone": "0455",
+      "job": "hvbjhbjh",
+      "birthday": "2022-12-03T21:00:00.000Z",
+      "id": 9
     }
   ]
 }

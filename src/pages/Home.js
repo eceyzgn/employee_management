@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,6 +13,14 @@ import { deleteEmployee, loadEmployees } from "../redux/actions";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { useNavigate } from "react-router-dom";
+
+
+
+const getFormattedDate = (dateStr) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString();
+}
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,6 +42,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+
 const Home = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -49,29 +59,18 @@ const Home = () => {
 
   return (
     <div>
-      <div
-        sx={{
-          alignItems: "center",
-          //boxShadow: "none",
-        }}
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => navigate("/addEmployee")}
-        >
-          Çalışan Ekle
-        </Button>
-      </div>
+     
+
+     <h2>Çalışan Listesi</h2>
 
       <TableContainer component={Paper}>
         <Table
-          sx={{ marginTop: 10, minWidth: 90 }}
+          sx={{  minWidth: 90, }}
           aria-label="customized table"
         >
-          <TableHead>
+          <TableHead >
             <TableRow>
-              <StyledTableCell>Ad</StyledTableCell>
+              <StyledTableCell >Ad</StyledTableCell>
               <StyledTableCell align="center">Soyad</StyledTableCell>
               <StyledTableCell align="center">Telefon</StyledTableCell>
               <StyledTableCell align="center">Pozisyon</StyledTableCell>
@@ -96,7 +95,7 @@ const Home = () => {
                     {employee.job}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    {employee.birthday}
+                 { getFormattedDate(employee.birthday)}
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     {" "}
@@ -107,9 +106,10 @@ const Home = () => {
                         alignItems: "center",
                         boxShadow: "none",
                         "& > *": {
-                          marginRight: "1px",
+                          marginRight: "15px",
                         },
                       }}
+                   
                     >
                       <Button
                         color="error"
@@ -132,6 +132,24 @@ const Home = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <br/>
+      <div
+        sx={{
+          alignItems: "center",
+          //boxShadow: "none",
+       
+        }}
+      >
+        <Button
+        style={{  backgroundColor:"#4caf50" }}
+          variant="contained"
+          color="primary"
+          onClick={() => navigate("/addEmployee")}
+         
+        >
+          Çalışan Ekle
+        </Button>
+      </div>
     </div>
   );
 };

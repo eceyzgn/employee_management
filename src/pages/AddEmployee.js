@@ -3,8 +3,12 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { addEmployee } from "../redux/actions";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const AddEmployee = () => {
   const [state, setState] = useState({
@@ -16,7 +20,7 @@ const AddEmployee = () => {
   });
 
   const [error, setError] = useState("");
-
+  //const [value, setValue] = React.useState(dayjs("2022-04-07"));
   let navigate = useNavigate();
   let dispatch = useDispatch();
 
@@ -27,21 +31,115 @@ const AddEmployee = () => {
     setState({ ...state, [name]: value });
   };
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if(!name || !surname || !phone || !job || !birthday){
-        setError("Lütfen gerekli bilgileri doldurunuz.");
-    }
-    else {
-       dispatch(addEmployee(state)) ;
-       navigate("/");
-       setError("");
+    if (!name || !surname || !phone || !job || !birthday) {
+      setError("Lütfen gerekli bilgileri doldurunuz.");
+    } else {
+      dispatch(addEmployee(state));
+      navigate("/");
+      setError("");
     }
   };
 
   return (
     <div>
-      <Button
+     
+      <h2> Çalışan Ekle</h2>
+      <h3 style={{ color: "red" }}>{error}</h3>
+
+      <Box
+        component="form"
+        marginTop="10px"
+        sx={{
+          "& > :not(style)": { m: 1, width: "45ch" },
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+        <TextField
+      
+          id="outlined-basic"
+          label="İsim"
+          name="name"
+          variant="outlined"
+          value={name}
+          type="text"
+          onChange={handleInputChange}
+        />
+        <br />
+        <TextField
+          id="outlined-basic"
+          label="Soyisim"
+          name="surname"
+          variant="outlined"
+          value={surname}
+          type="text"
+          onChange={handleInputChange}
+        />
+        <br />
+        <TextField
+          id="outlined-basic"
+          label="Telefon Numarası"
+          name="phone"
+          variant="outlined"
+          value={phone}
+          type="number"
+          onChange={handleInputChange}
+        />
+        <br />
+        <TextField
+          id="outlined-basic"
+          label="Çalıştığı Pozisyon"
+          variant="outlined"
+          name="job"
+          value={job}
+          type="text"
+          onChange={handleInputChange}
+        />
+        <br />
+        {/* <TextField
+          id="outlined-basic"
+          label="Doğum Günü"
+          variant="outlined"
+          value={birthday}
+          name="birthday"
+          type="text"
+          onChange={handleInputChange}
+        /> */}
+      
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            inputFormat="DD.MM.YYYY"
+            label="Doğum Günü"
+            value={birthday}
+            name="birthday"
+            onChange={ birthday=> handleInputChange({target:{value:birthday, name:'birthday'}})}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+               
+                //onChange={handleInputChange}
+              />
+            )}
+          />
+        </LocalizationProvider>
+
+        
+        <br />
+        <Button
+          style={{ width: "380px", backgroundColor:"#4caf50" }}
+          variant="contained"
+          color="primary"
+          type="submit"
+          onChange={handleInputChange}
+          
+        >
+          Çalışan Ekle
+        </Button>
+        <br/>
+        <Button
         style={{ width: "380px", marginTop: "20px" }}
         variant="contained"
         color="error"
@@ -49,80 +147,7 @@ const AddEmployee = () => {
       >
         Çalışan Listesine Dön
       </Button>
-      <h2> Çalışan Ekle</h2>
-       <h3 style={{color:"red"}}>{error}</h3>
-    
-        <Box
-          component="form"
-          marginTop="10px"
-          sx={{
-            "& > :not(style)": { m: 1, width: "45ch" },
-          }}
-          noValidate
-          autoComplete="off"
-          onSubmit={handleSubmit}
-        >
-          <TextField
-            id="outlined-basic"
-            label="İsim"
-            name="name"
-            variant="outlined"
-            value={name}
-            type="text"
-            onChange={handleInputChange}
-          />
-          <br />
-          <TextField
-            id="outlined-basic"
-            label="Soyisim"
-            name="surname"
-            variant="outlined"
-            value={surname}
-            type="text"
-            onChange={handleInputChange}
-          />
-          <br />
-          <TextField
-            id="outlined-basic"
-            label="Telefon Numarası"
-            name="phone"
-            variant="outlined"
-            value={phone}
-            type="number"
-            onChange={handleInputChange}
-          />
-          <br />
-          <TextField
-            id="outlined-basic"
-            label="Çalıştığı Pozisyon"
-            variant="outlined"
-            name="job"
-            value={job}
-            type="text"
-            onChange={handleInputChange}
-          />
-          <br />
-          <TextField
-            id="outlined-basic"
-            label="Doğum Günü"
-            variant="outlined"
-            value={birthday}
-            name="birthday"
-            type="text"
-            onChange={handleInputChange}
-          />
-          <br />
-          <Button
-            style={{ width: "380px" }}
-            variant="contained"
-            color="primary"
-            type="submit"
-            onChange={handleInputChange}
-          >
-            Çalışan Ekle
-          </Button>
-        </Box>
-     
+      </Box>
     </div>
   );
 };
