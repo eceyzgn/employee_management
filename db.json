@@ -1,0 +1,36 @@
+{
+  "employees": [
+    {
+      "name": "Ali",
+      "surname": "Veliiiii",
+      "phone": "1234567",
+      "job": "İş analisti",
+      "birthday": "01.05.2000",
+      "id": 2
+    },
+    {
+      "name": "Mehmet",
+      "surname": "Bilir",
+      "phone": "12345678",
+      "job": "Ceo",
+      "birthday": "06.04.1998",
+      "id": 3
+    },
+    {
+      "name": "ece",
+      "surname": "yazgan",
+      "phone": "5536886043",
+      "job": "yazılım",
+      "birthday": "30.05.1999",
+      "id": 4
+    },
+    {
+      "name": "gdfshsfdaaaaa",
+      "surname": "hfdhdfhfasdfasf",
+      "phone": "12345",
+      "job": "dfgdfg",
+      "birthday": "30.05.2000",
+      "id": 5
+    }
+  ]
+}
