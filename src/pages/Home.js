@@ -13,14 +13,12 @@ import { deleteEmployee, loadEmployees } from "../redux/actions";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { useNavigate } from "react-router-dom";
-
-
+import { width } from "@mui/system";
 
 const getFormattedDate = (dateStr) => {
   const date = new Date(dateStr);
   return date.toLocaleDateString();
-}
-
+};
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -42,7 +40,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-
 const Home = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -57,20 +54,39 @@ const Home = () => {
     }
   };
 
+  const imageClick=()=>{
+    navigate("/")
+  }
+
   return (
     <div>
-     
-
-     <h2>Çalışan Listesi</h2>
+       <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "5px",
+          marginBottom: "15px",
+          height: "72px",
+        }}
+      >
+        <div style={{ display: "flex", float: "left" }}>
+        <Button>
+          <img
+            src="https://openmoney.com.tr/images/logo.svg"
+            style={{ width: "170px" ,pointerEvents:"all"}}
+            onClick={()=>imageClick()}
+          />
+          </Button>
+        </div>
+      
+      </div>
+      <h2>Çalışan listesi</h2>
 
       <TableContainer component={Paper}>
-        <Table
-          sx={{  minWidth: "100px", }}
-          aria-label="customized table"
-        >
-          <TableHead >
+        <Table sx={{ minWidth: "100px" }} aria-label="customized table">
+          <TableHead>
             <TableRow>
-              <StyledTableCell >Ad</StyledTableCell>
+              <StyledTableCell>Ad</StyledTableCell>
               <StyledTableCell align="center">Soyad</StyledTableCell>
               <StyledTableCell align="center">Telefon</StyledTableCell>
               <StyledTableCell align="center">Pozisyon</StyledTableCell>
@@ -95,7 +111,7 @@ const Home = () => {
                     {employee.job}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                 { getFormattedDate(employee.birthday)}
+                    {getFormattedDate(employee.birthday)}
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     {" "}
@@ -109,7 +125,6 @@ const Home = () => {
                           marginRight: "15px",
                         },
                       }}
-                   
                     >
                       <Button
                         color="error"
@@ -132,7 +147,7 @@ const Home = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <br/>
+      <br />
       <div
         sx={{
           alignItems: "center",
@@ -140,16 +155,30 @@ const Home = () => {
        
         }}
       >
-        <Button
-        style={{  backgroundColor:"#4caf50" }}
-          variant="contained"
-          color="primary"
-          onClick={() => navigate("/addEmployee")}
-         
-        >
-          Çalışan Ekle
-        </Button>
+      <Button
+            style={{
+              backgroundColor: "#4caf50",
+              marginInlineStart: "0px",
+              height: "40px",
+              width: "170px",
+              fontWeight:"10000px"
+            }}
+            variant="contained"
+            color="primary"
+            onClick={() => navigate("/addEmployee")}
+          >
+            Çalışan Ekle
+          </Button>
       </div>
+
+      
+       
+       
+          
+        
+
+       
+      
     </div>
   );
 };

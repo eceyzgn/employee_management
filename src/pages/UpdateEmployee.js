@@ -57,10 +57,32 @@ const UpdateEmployee = () => {
       setError("");
     }
   };
+  const imageClick=()=>{
+    navigate("/")
+  }
 
   return (
     <div>
+       <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "5px",
+          marginBottom: "15px",
+          height: "72px",
+        }}
+      >
+        <div style={{ display: "flex", float: "left" }}>
+        <Button>
+          <img
+            src="https://openmoney.com.tr/images/logo.svg"
+            style={{ width: "170px" ,pointerEvents:"all"}}
+            onClick={()=>imageClick()}
+          />
+          </Button>
+        </div>
       
+      </div>
       <h2> Çalışan Düzenle</h2>
       <h3 style={{ color: "red" }}>{error}</h3>
 
