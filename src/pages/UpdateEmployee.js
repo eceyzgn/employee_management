@@ -4,16 +4,16 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {  getSingleEmployee, updateEmployee } from "../redux/actions";
+import { getSingleEmployee, updateEmployee } from "../redux/actions";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import dayjs from "dayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import MenuItem from "@mui/material/MenuItem";
 
-const getFormattedDate = (dateStr) => {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString();
-}
+// const getFormattedDate = (dateStr) => {
+//   const date = new Date(dateStr);
+//   return date.toLocaleDateString();
+// }
 
 const UpdateEmployee = () => {
   const [state, setState] = useState({
@@ -29,7 +29,7 @@ const UpdateEmployee = () => {
   const { employee } = useSelector((state) => state.data);
   let navigate = useNavigate();
   let dispatch = useDispatch();
-
+  const maxDate = new Date();
   const { name, surname, phone, job, birthday } = state;
 
   useEffect(() => {
@@ -52,18 +52,18 @@ const UpdateEmployee = () => {
     if (!name || !surname || !phone || !job || !birthday) {
       setError("Lütfen gerekli bilgileri doldurunuz.");
     } else {
-      dispatch(updateEmployee(state,id));
+      dispatch(updateEmployee(state, id));
       navigate("/");
       setError("");
     }
   };
-  const imageClick=()=>{
-    navigate("/")
-  }
+  const imageClick = () => {
+    navigate("/");
+  };
 
   return (
     <div>
-       <div
+      <div
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -73,15 +73,14 @@ const UpdateEmployee = () => {
         }}
       >
         <div style={{ display: "flex", float: "left" }}>
-        <Button>
-          <img
-            src="https://openmoney.com.tr/images/logo.svg"
-            style={{ width: "170px" ,pointerEvents:"all"}}
-            onClick={()=>imageClick()}
-          />
+          <Button>
+            <img
+              src="https://openmoney.com.tr/images/logo.svg"
+              style={{ width: "170px", pointerEvents: "all" }}
+              onClick={() => imageClick()}
+            />
           </Button>
         </div>
-      
       </div>
       <h2> Çalışan Düzenle</h2>
       <h3 style={{ color: "red" }}>{error}</h3>
@@ -126,7 +125,7 @@ const UpdateEmployee = () => {
           onChange={handleInputChange}
         />
         <br />
-        <TextField
+        {/* <TextField
           id="outlined-basic"
           label="Çalıştığı Pozisyon"
           variant="outlined"
@@ -134,30 +133,48 @@ const UpdateEmployee = () => {
           value={job || ""}
           type="text"
           onChange={handleInputChange}
-        />
+        /> */}
+
+        <TextField
+          id="select"
+          label="pozisyon"
+          select
+          value={job || ""}
+          onChange={handleInputChange}
+          name="job"
+        >
+          <MenuItem value="Ceo">Ceo</MenuItem>
+          <MenuItem value="Yazılım Mühendisi">Yazılım Mühendisi</MenuItem>
+          <MenuItem value="İnsan kaynakları">İnsan kaynakları</MenuItem>
+        </TextField>
         <br />
-   
-      
+
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DesktopDatePicker
-            inputFormat=" MM.DD.YYYY"
+          <DatePicker
+            inputFormat="DD.MM.YYYY"
             id="outlined-basic"
             label="Doğum Günü"
             variant="outlined"
-            value={getFormattedDate(birthday) || ""}
+            // value={getFormattedDate(birthday) || ""}
+            value={birthday}
             name="birthday"
             type="text"
-            
-            onChange={ birthday=> handleInputChange({target:{value:birthday, name:'birthday'}})}
+            maxDate={maxDate}
+            onChange={(birthday) =>
+              handleInputChange({
+                target: { value: birthday, name: "birthday" },
+              })
+            }
             renderInput={(params) => (
               <TextField
                 {...params}
-               
+
                 //onChange={handleInputChange}
               />
             )}
           />
         </LocalizationProvider>
+
         <br />
         <Button
           style={{ width: "380px" }}
@@ -168,18 +185,21 @@ const UpdateEmployee = () => {
         >
           Güncelle
         </Button>
-        <br/>
+        <br />
         <Button
-        style={{ width: "380px", marginTop: "20px" }}
-        variant="contained"
-        color="error"
-        onClick={() => navigate("/")}
-      >
-        Çalışan Listesine Dön
-      </Button>
+          style={{ width: "380px", marginTop: "20px" }}
+          variant="contained"
+          color="error"
+          onClick={() => navigate("/")}
+        >
+          Çalışan Listesine Dön
+        </Button>
       </Box>
     </div>
   );
 };
 
 export default UpdateEmployee;
+
+
+

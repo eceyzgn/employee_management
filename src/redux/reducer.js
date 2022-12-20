@@ -22,11 +22,11 @@ const employeesReducers = (state = initialState, action) => {
         loading: false,
       };
     case types.GET_SINGLE_EMPLOYEE:
-        return{
-            ...state,
-            employee:action.payload,
-            loading:false
-        }
+      return {
+        ...state,
+        employee: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }

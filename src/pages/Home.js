@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,7 +12,6 @@ import { deleteEmployee, loadEmployees } from "../redux/actions";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { useNavigate } from "react-router-dom";
-import { width } from "@mui/system";
 
 const getFormattedDate = (dateStr) => {
   const date = new Date(dateStr);
@@ -54,13 +52,13 @@ const Home = () => {
     }
   };
 
-  const imageClick=()=>{
-    navigate("/")
-  }
+  const imageClick = () => {
+    navigate("/");
+  };
 
   return (
     <div>
-       <div
+      <div
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -70,17 +68,16 @@ const Home = () => {
         }}
       >
         <div style={{ display: "flex", float: "left" }}>
-        <Button>
-          <img
-            src="https://openmoney.com.tr/images/logo.svg"
-            style={{ width: "170px" ,pointerEvents:"all"}}
-            onClick={()=>imageClick()}
-          />
+          <Button>
+            <img
+              src="https://openmoney.com.tr/images/logo.svg"
+              style={{ width: "170px", pointerEvents: "all" }}
+              onClick={() => imageClick()}
+            />
           </Button>
         </div>
-      
       </div>
-      <h2>Çalışan listesi</h2>
+      <h2> ÇALIŞAN LİSTESİ</h2>
 
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: "100px" }} aria-label="customized table">
@@ -122,7 +119,7 @@ const Home = () => {
                         alignItems: "center",
                         boxShadow: "none",
                         "& > *": {
-                          marginRight: "15px",
+                          m: 1,
                         },
                       }}
                     >
@@ -152,33 +149,23 @@ const Home = () => {
         sx={{
           alignItems: "center",
           //boxShadow: "none",
-       
         }}
       >
-      <Button
-            style={{
-              backgroundColor: "#4caf50",
-              marginInlineStart: "0px",
-              height: "40px",
-              width: "170px",
-              fontWeight:"10000px"
-            }}
-            variant="contained"
-            color="primary"
-            onClick={() => navigate("/addEmployee")}
-          >
-            Çalışan Ekle
-          </Button>
+        <Button
+          style={{
+            backgroundColor: "#4caf50",
+            marginInlineStart: "0px",
+            height: "40px",
+            width: "170px",
+            fontWeight: "10000px",
+          }}
+          variant="contained"
+          color="primary"
+          onClick={() => navigate("/addEmployee")}
+        >
+          Çalışan Ekle
+        </Button>
       </div>
-
-      
-       
-       
-          
-        
-
-       
-      
     </div>
   );
 };

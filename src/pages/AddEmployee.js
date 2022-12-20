@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import { Button, FormControl } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addEmployee } from "../redux/actions";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import MenuItem from "@mui/material/MenuItem";
 
 const AddEmployee = () => {
   const [state, setState] = useState({
@@ -16,7 +16,7 @@ const AddEmployee = () => {
     surname: "",
     phone: "",
     job: "",
-    birthday: "",
+    birthday: Date.now(),
   });
 
   const [error, setError] = useState("");
@@ -42,9 +42,9 @@ const AddEmployee = () => {
     }
   };
 
-  const imageClick=()=>{
-    navigate("/")
-  }
+  const imageClick = () => {
+    navigate("/");
+  };
 
   return (
     <div>
@@ -58,17 +58,14 @@ const AddEmployee = () => {
         }}
       >
         <div style={{ display: "flex", float: "left" }}>
-          
           <Button>
-          <img
-            src="https://openmoney.com.tr/images/logo.svg"
-            style={{ width: "170px" ,pointerEvents:"all"}}
-            onClick={()=>imageClick()}
-          />
+            <img
+              src="https://openmoney.com.tr/images/logo.svg"
+              style={{ width: "170px", pointerEvents: "all" }}
+              onClick={() => imageClick()}
+            />
           </Button>
-         
         </div>
-      
       </div>
       <h2> Çalışan Ekle</h2>
       <h3 style={{ color: "red" }}>{error}</h3>
@@ -84,7 +81,6 @@ const AddEmployee = () => {
         onSubmit={handleSubmit}
       >
         <TextField
-      
           id="outlined-basic"
           label="İsim"
           name="name"
@@ -113,65 +109,58 @@ const AddEmployee = () => {
           type="number"
           onChange={handleInputChange}
         />
+
         <br />
+
         <TextField
-          id="outlined-basic"
-          label="Çalıştığı Pozisyon"
-          variant="outlined"
+          id="select"
+          label="Pozisyon"
+          select
+          onChange={handleInputChange}
           name="job"
-          value={job}
-          type="text"
-          onChange={handleInputChange}
-        />
+        >
+          <MenuItem value="CEO">Ceo</MenuItem>
+          <MenuItem value="Yazılım Mühendisi">Yazılım Mühendisi</MenuItem>
+          <MenuItem value="İnsan kaynakları">İnsan kaynakları</MenuItem>
+        </TextField>
+
         <br />
-        {/* <TextField
-          id="outlined-basic"
-          label="Doğum Günü"
-          variant="outlined"
-          value={birthday}
-          name="birthday"
-          type="text"
-          onChange={handleInputChange}
-        /> */}
-      
+
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             inputFormat="DD.MM.YYYY"
             label="Doğum Günü"
             value={birthday}
             name="birthday"
-            onChange={ birthday=> handleInputChange({target:{value:birthday, name:'birthday'}})}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-               
-                //onChange={handleInputChange}
-              />
-            )}
+            maxDate={birthday}
+            onChange={(birthday) =>
+              handleInputChange({
+                target: { value: birthday, name: "birthday" },
+              })
+            }
+            renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
 
-        
         <br />
         <Button
-          style={{ width: "380px", backgroundColor:"#4caf50" }}
+          style={{ width: "380px", backgroundColor: "#4caf50" }}
           variant="contained"
           color="primary"
           type="submit"
           onChange={handleInputChange}
-          
         >
           Çalışan Ekle
         </Button>
-        <br/>
+        <br />
         <Button
-        style={{ width: "380px", marginTop: "20px" }}
-        variant="contained"
-        color="error"
-        onClick={() => navigate("/")}
-      >
-        Çalışan Listesine Dön
-      </Button>
+          style={{ width: "380px", marginTop: "20px" }}
+          variant="contained"
+          color="error"
+          onClick={() => navigate("/")}
+        >
+          Çalışan Listesine Dön
+        </Button>
       </Box>
     </div>
   );

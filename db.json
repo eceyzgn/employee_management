@@ -1,44 +1,28 @@
 {
   "employees": [
     {
-      "name": "Ali",
-      "surname": "Veli",
-      "phone": "1234567",
-      "job": "İş analisti",
-      "birthday": "01.05.2000",
+      "name": "Ayşe",
+      "surname": "Yılmaz",
+      "phone": "123456789",
+      "job": "CEO",
+      "birthday": "2021-10-31T21:00:00.000Z",
+      "id": 1
+    },
+    {
+      "name": "Veli",
+      "surname": "Yıldırım",
+      "phone": "11226345",
+      "job": "Yazılım Mühendisi",
+      "birthday": "2010-01-18T22:00:00.000Z",
       "id": 2
     },
     {
       "name": "Mehmet",
-      "surname": "Bilir",
-      "phone": "12345678",
-      "job": "Ceo",
-      "birthday": "06.04.1998",
+      "surname": "Korkmaz",
+      "phone": "123456789",
+      "job": "İnsan kaynakları",
+      "birthday": "1999-05-30T00:47:09.000Z",
       "id": 3
-    },
-    {
-      "name": "ece",
-      "surname": "yazgan",
-      "phone": "546",
-      "job": "yaz",
-      "birthday": "2022-12-11",
-      "id": 6
-    },
-    {
-      "name": "dgdfsg",
-      "surname": "fdhdfh",
-      "phone": "5243245",
-      "job": "354354",
-      "birthday": "2012-01-09T22:00:00.000Z",
-      "id": 7
-    },
-    {
-      "name": "ncvncv",
-      "surname": "mvcmb",
-      "phone": "2524",
-      "job": "cxbxcb",
-      "birthday": "2021-10-31T21:00:00.000Z",
-      "id": 8
     }
   ]
 }
